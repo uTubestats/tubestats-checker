@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TubeStats Checker: public YouTube video statistics</title>
+<meta name="description" content="Paste a public YouTube or Shorts link to see its views, likes, comments and like-to-view ratio. Uses the official YouTube Data API.">
+<link rel="canonical" href="https://YOUR-SITE.pages.dev/">
+<meta property="og:title" content="TubeStats Checker: public YouTube video statistics"><meta property="og:description" content="Paste a public YouTube or Shorts link to see its views, likes, comments and like-to-view ratio. Uses the official YouTube Data API."><meta property="og:type" content="website"><meta property="og:url" content="https://YOUR-SITE.pages.dev/">
+<meta name="theme-color" content="#0b1426">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"TubeStats Checker","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","description":"Paste a public YouTube video or Shorts link to see its public view, like and comment counts."}</script>
+</head><body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="wrap bar-in"><a class="brand" href="/">TubeStats<span>Checker</span></a><nav aria-label="Main"><a href="/" aria-current="page">Check a video</a><a href="/guide.html">Guide</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></nav></div></header>
+<main id="main" class="wrap">
+<section class="hero">
+<h1>Check the public numbers on any YouTube video</h1>
+<p class="lead">Paste a link to a public video or Short. You get the title, channel, publish date, views, likes and comments, plus the like-to-view ratio, straight from the official YouTube Data API.</p>
+<form id="form" class="check" novalidate>
+<label for="url">YouTube video or Shorts link</label>
+<div class="row"><input id="url" name="url" type="text" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="https://www.youtube.com/watch?v=..." aria-describedby="hint url-err" required>
+<button id="go" type="submit">Check Video</button></div>
+<p id="hint" class="hint">Works with youtube.com/watch, youtu.be and youtube.com/shorts links.</p>
+<p id="url-err" class="err" role="alert" hidden></p>
+</form>
+</section>
+<div id="status" class="status" role="status" aria-live="polite" hidden></div>
+<section id="result" class="result" aria-live="polite" hidden></section>
+<section class="notes">
+<h2>What you will and will not see</h2>
+<p>This tool reads only public data. Likes and comment counts can be hidden by creators, and numbers may lag behind what the YouTube app shows. Watch time, impressions, revenue and audience data are private to the channel owner and are never available here. When a number is missing, the page says so instead of guessing.</p>
+<p><a href="/guide.html">Read the guide to YouTube public statistics</a></p>
+</section></main>
+<footer class="foot"><div class="wrap"><p>TubeStats Checker shows public data returned by the YouTube Data API. It is not affiliated with or endorsed by YouTube or Google.</p>
+<p><a href="/privacy.html">Privacy Policy</a> <a href="/terms.html">Terms of Service</a> <a href="/guide.html">Guide</a> <a href="/contact.html">Contact</a></p></div></footer>
+<script src="/app.js" defer></script>
+</body></html>
