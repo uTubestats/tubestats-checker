@@ -9,40 +9,43 @@ const json = (body, status = 200) =>
     },
   });
 
-function extractObject(text, key) {
-  const patterns = [
-    new RegExp(key + "\\s*=\\s*"),
-    new RegExp('"' + key + '"\\s*:\\s*'),
-  ];
+const num = (v) =>
+  v == null || v === "" || Number.isNaN(Number(v))
+    ? null
+    : Number(v);
 
-  for (const pattern of patterns) {
-    const match = pattern.exec(text);
-    if (!match) continue;
+function extractPlayerResponse(html) {
+  const marker = "ytInitialPlayerResponse";
+  const start = html.indexOf(marker);
+  if (start < 0) return null;
 
-    const start = text.indexOf("{", match.index + match[0].length);
-    if (start < 0) continue;
+  const equals = html.indexOf("=", start + marker.length);
+  const open = html.indexOf("{", equals + 1);
+  if (equals < 0 || open < 0) return null;
 
-    let depth = 0;
-    let inString = false;
-    let escaped = false;
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
 
-    for (let i = start; i < text.length; i++) {
-      const c = text[i];
+  for (let i = open; i < html.length; i++) {
+    const c = html[i];
 
-      if (inString) {
-        if (escaped) escaped = false;
-        else if (c === "\\") escaped = true;
-        else if (c === '"') inString = false;
-        continue;
-      }
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (c === "\\") escaped = true;
+      else if (c === '"') inString = false;
+      continue;
+    }
 
-      if (c === '"') inString = true;
-      else if (c === "{") depth++;
-      else if (c === "}" && --depth === 0) {
+    if (c === '"') inString = true;
+    else if (c === "{") depth++;
+    else if (c === "}") {
+      depth--;
+      if (depth === 0) {
         try {
-          return JSON.parse(text.slice(start, i + 1));
+          return JSON.parse(html.slice(open, i + 1));
         } catch {
-          break;
+          return null;
         }
       }
     }
@@ -59,15 +62,16 @@ export async function onRequestGet({ request }) {
   }
 
   let response;
+
   try {
     response = await fetch(
       `https://www.youtube.com/watch?v=${encodeURIComponent(id)}`,
       {
         headers: {
-          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+          "User-Agent":
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
           "Accept-Language": "en-US,en;q=0.9",
         },
-        cf: { cacheTtl: 300 },
       }
     );
   } catch {
@@ -75,12 +79,13 @@ export async function onRequestGet({ request }) {
   }
 
   if (!response.ok) {
-    return json({ error: "upstream" }, 502);
+    return json({ error: "unavailable" }, 502);
   }
 
   const html = await response.text();
-  const player = extractObject(html, "ytInitialPlayerResponse");
+  const player = extractPlayerResponse(html);
   const details = player?.videoDetails;
+  const micro = player?.microformat?.playerMicroformatRenderer;
 
   if (!details || details.videoId !== id) {
     return json({
@@ -89,27 +94,27 @@ export async function onRequestGet({ request }) {
     }, 502);
   }
 
-  const micro = player?.microformat?.playerMicroformatRenderer;
-  const thumbs = details.thumbnail?.thumbnails || [];
-  const thumbnail = thumbs.length
-    ? thumbs[thumbs.length - 1].url
-    : `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+  const text = (html.match(/"label"\s*:\s*"[^"]*(?:like|likes)[^"]*"/i) || [])[0];
+  let likeCount = null;
+
+  if (text) {
+    const match = text.match(/"label"\s*:\s*"([\d,.]+)\s*likes?"/i);
+    if (match) likeCount = num(match[1].replace(/,/g, ""));
+  }
 
   return json({
     id,
     title: details.title || "Untitled video",
     channelTitle: details.author || "Unknown channel",
     channelId: details.channelId || null,
-    publishedAt: micro?.publishDate
-      ? new Date(micro.publishDate).toISOString()
-      : null,
-    thumbnail,
-    viewCount: details.viewCount != null
-      ? Number(details.viewCount)
-      : null,
-    likeCount: null,
+    publishedAt: micro?.publishDate || micro?.uploadDate || null,
+    thumbnail:
+      details.thumbnail?.thumbnails?.slice(-1)[0]?.url || null,
+    viewCount: num(details.viewCount),
+    likeCount,
     commentCount: null,
+    shareCount: null,
+    category: micro?.category || null,
     fetchedAt: new Date().toISOString(),
   });
-    }
-  
+}
