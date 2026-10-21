@@ -79,9 +79,11 @@ export async function onRequestGet({ request }) {
   }
 
   if (!response.ok) {
-    return json({ error: "unavailable" }, 502);
-  }
-
+  return json({
+    error: "unavailable",
+    youtubeStatus: response.status,
+  }, 502);
+}
   const html = await response.text();
   const player = extractPlayerResponse(html);
   const details = player?.videoDetails;
