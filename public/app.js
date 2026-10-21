@@ -48,6 +48,7 @@ function render(v,kind){
   info.appendChild(h);
   var tags=el('p','meta');
   tags.appendChild(el('span','tag',kind==='short'?'Shorts link':'Video link'));
+if(v.category) tags.appendChild(el('span','tag',v.category));
   var ch=v.channelId?el('a',null,v.channelTitle):el('span',null,v.channelTitle);
   if(v.channelId){ch.href='https://www.youtube.com/channel/'+encodeURIComponent(v.channelId);ch.rel='noopener';}
   tags.appendChild(ch);info.appendChild(tags);
