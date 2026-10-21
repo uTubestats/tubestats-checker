@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PolishDraft – AI Email Polisher & Professional Message Rewriter</title>
+<meta id="md" name="description" content="PolishDraft turns rough drafts into clear, professional emails and messages. Choose a mode, tone and length, then copy the result.">
+<meta property="og:title" content="PolishDraft – AI Email & Message Polisher">
+<meta property="og:description" content="Rewrite rough drafts into clear, professional emails and messages.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E✒️%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#faf8f5;--surf:#fff;--ink:#1b1830;--mut:#5b5873;--line:#e6e1da;--pri:#4b3fd6;--pri2:#7c5cff;--acc:#e8590c;--ok:#13795b;--err:#b42318;--r:14px;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#13111f;--surf:#1c1a2e;--ink:#f1eefc;--mut:#b4b0cc;--line:#332f4d;--pri:#9d8cff;--pri2:#b9a8ff;--acc:#ff8a4c;--ok:#4cd2a6;--err:#ff8f85;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#13111f;--surf:#1c1a2e;--ink:#f1eefc;--mut:#b4b0cc;--line:#332f4d;--pri:#9d8cff;--pri2:#b9a8ff;--acc:#ff8a4c;--ok:#4cd2a6;--err:#ff8f85;color-scheme:dark}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px)}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Plus Jakarta Sans","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:Fraunces,Georgia,"Iowan Old Style",serif;font-weight:700;line-height:1.2;margin:0 0 .5em}
+h1{font-size:clamp(2rem,6vw,3.2rem)}h2{font-size:clamp(1.5rem,4vw,2rem)}h3{font-size:1.2rem}
+a{color:var(--pri)}p{margin:0 0 1em}
+.wrap{max-width:1040px;margin:0 auto;padding:0 18px}
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30}
+.bar{display:flex;align-items:center;justify-content:space-between;height:60px;gap:10px}
+.brand{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--ink);font:700 1.35rem Fraunces,Georgia,serif}
+.brand b{color:var(--pri)}
+nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0;align-items:center}
+nav a.l{display:block;padding:8px 11px;border-radius:999px;text-decoration:none;color:var(--ink);font-size:.93rem;position:relative}
+nav a.l:hover{background:var(--line)}nav a.l[aria-current=page]{background:var(--pri);color:#fff}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 20px;border-radius:999px;border:1px solid var(--line);background:var(--surf);color:var(--ink);font:600 .95rem inherit;font-family:inherit;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px #0002}.btn:active{transform:none}
+.btn.p{background:linear-gradient(135deg,var(--pri),var(--pri2));color:#fff;border:0}
+:where(a,button,select,input,textarea,summary):focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.burger{display:none}
+@media (max-width:860px){.burger{display:inline-flex;padding:0 14px}nav{display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--line);padding:10px 18px 16px}nav.open{display:block;animation:dn .2s ease}nav ul{flex-direction:column;align-items:stretch}nav a.l{padding:12px 14px}}
+@keyframes dn{from{opacity:0;transform:translateY(-8px)}}
+.view{display:none;padding:28px 0 50px}.view.on{display:block;animation:fi .3s ease}
+@keyframes fi{from{opacity:0;transform:translateY(6px)}}
+.hero{padding:10px 0 20px}.hero p.lead{font-size:1.1rem;color:var(--mut);max-width:620px}
+.hl{background:linear-gradient(135deg,var(--pri),var(--acc));-webkit-background-clip:text;background-clip:text;color:transparent}
+.card{background:var(--surf);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:0 6px 24px #1b183010}
+.grid{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}
+label{display:block;font-weight:600;font-size:.88rem;margin:0 0 4px}
+select,textarea,input[type=text],input[type=email]{width:100%;max-width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px 12px;font:inherit;min-height:44px}
+textarea{min-height:210px;resize:vertical;line-height:1.55}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.sp{flex:1}.sm{font-size:.85rem;color:var(--mut)}
+.opts{display:grid;gap:10px;grid-template-columns:repeat(3,1fr);margin:10px 0}
+@media (max-width:760px){.opts{grid-template-columns:1fr}}
+#out{white-space:pre-wrap;min-height:210px;background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:12px}
+#msg{min-height:1.5em;font-weight:600;font-size:.92rem;margin-top:8px}.ok{color:var(--ok)}.er{color:var(--err)}
+.tabs{display:flex;gap:6px;margin-bottom:8px}.tabs button{min-height:36px;padding:0 14px}.tabs [aria-pressed=true]{background:var(--pri);color:#fff}
+.notice{border-left:4px solid var(--acc);background:var(--surf);padding:12px 14px;border-radius:8px;margin:14px 0;font-size:.92rem}
+.adslot{margin:28px 0;padding:10px;border:1px dashed var(--line);border-radius:10px;text-align:center;font-size:.75rem;color:var(--mut);min-height:0}
+details{background:var(--surf);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:8px 0}summary{cursor:pointer;font-weight:600;min-height:32px}
+pre.t{white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px;font:inherit;font-size:.93rem}
+.prose{max-width:720px}.prose h2{margin-top:1.4em}
+.fld{margin-bottom:14px}.fe{color:var(--err);font-size:.85rem;font-weight:600;min-height:1.2em;margin-top:3px}[aria-invalid=true]{border-color:var(--err)!important}.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
+footer{border-top:1px solid var(--line);padding:26px 0 36px;font-size:.9rem;color:var(--mut)}
+footer ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 18px;padding:0;margin:10px 0}
+.sr{position:absolute;left:-9999px}.skip:focus{left:8px;top:8px;z-index:99;background:#fff;color:#000;padding:8px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="sr skip" href="#main">Skip to content</a>
+<header><div class="wrap bar">
+<a class="brand" href="#home" aria-label="PolishDraft home"><svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4b3fd6"/><stop offset="1" stop-color="#e8590c"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#g)"/><path d="M9 22l1.2-4.6L20.5 7l4.5 4.5L14.6 21.8zM9 22l4.6-1.2" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"/></svg>Polish<b>Draft</b></a>
+<button class="btn burger" id="bg" aria-expanded="false" aria-controls="nv">Menu</button>
+<nav id="nv" aria-label="Main"><ul>
+<li><a class="l" href="#home">Email Polisher</a></li>
+<li><a class="l" href="#message">Message Rewriter</a></li>
+<li><a class="l" href="#how">How It Works</a></li>
+<li><a class="l" href="#tips">Writing Tips</a></li>
+<li><a class="l" href="#about">About</a></li>
+<li><a class="l" href="#contact">Contact</a></li>
+<li><button class="btn" id="th" aria-label="Toggle dark mode">◐</button></li>
+</ul></nav>
+</div></header>
+
+<main id="main" class="wrap">
+
+<!-- TOOL (home + message) -->
+<section class="view" id="v-home" data-tool>
+<div class="hero"><h1 id="h1">Turn rough drafts into <span class="hl">polished emails</span></h1>
+<p class="lead" id="lead">PolishDraft is a free AI email polisher and message rewriter. Paste your draft, pick a mode and tone, and get a clearer, more professional version that keeps your meaning.</p>
+<p class="sm">Your text is sent to an AI service (Puter) only when you press the button. PolishDraft has no accounts and does not save your writing itself.</p></div>
+
+<div class="card" id="tool">
+<div class="opts">
+<div><label for="mode">Mode</label><select id="mode">
+<option>Professional Polish</option><option>Grammar Correction</option><option>Formal Email</option><option>Friendly &amp; Natural</option><option>Concise Rewrite</option><option>Confident &amp; Direct</option><option>Polite &amp; Diplomatic</option><option>Follow-Up Message</option><option>Business Communication</option><option>Email Subject Generator</option><option>Short Message Rewriter</option><option>Custom Instructions</option></select></div>
+<div><label for="tone">Tone</label><select id="tone"><option>Professional</option><option>Formal</option><option>Friendly</option><option>Confident</option><option>Polite</option><option>Persuasive</option><option>Empathetic</option><option>Casual</option><option>Concise</option></select></div>
+<div><label for="len">Length</label><select id="len"><option>Shorter</option><option selected>Balanced</option><option>More detailed</option></select></div>
+</div>
+<div class="grid" style="margin-bottom:10px">
+<div><label for="ctx">Context (optional)</label><input type="text" id="ctx" maxlength="200" placeholder="e.g. email to my manager about a deadline"></div>
+<div><label for="cus">Custom instructions (optional; required for Custom mode)</label><input type="text" id="cus" maxlength="300" placeholder="e.g. keep it under 80 words, British spelling"></div>
+</div>
+<div class="grid">
+<div><label for="inp">Your draft</label>
+<textarea id="inp" maxlength="5000" placeholder="Paste or type your email or message here. Include names, dates and details that must stay accurate."></textarea>
+<div class="row"><span class="sm" id="cc">0 / 5000</span><span class="sp"></span><button class="btn" id="ex" type="button">Try an example</button><button class="btn" id="cl" type="button">Clear</button></div></div>
+<div><label id="ol">Polished result</label>
+<div class="tabs" role="group" aria-label="View"><button class="btn" id="tr" aria-pressed="true">Result</button><button class="btn" id="tc" aria-pressed="false">Compare</button></div>
+<div id="out" role="region" aria-labelledby="ol" aria-live="polite" tabindex="0"><span class="sm">Your polished text will appear here.</span></div>
+<div class="row"><span class="sm" id="oc"></span><span class="sp"></span></div></div>
+</div>
+<div class="row"><button class="btn p" id="go" type="button">Polish My Writing</button><button class="btn" id="cp" type="button" disabled>Copy</button><button class="btn" id="rg" type="button" disabled>Regenerate</button><button class="btn" id="ia" type="button" disabled>Improve Again</button><span class="sm">Ctrl/⌘ + Enter to run</span></div>
+<div id="msg" role="status"></div>
+</div>
+<div class="adslot" hidden aria-hidden="true"><!-- AD INTEGRATION POINT: add your approved AdSense unit here, below the tool, never inside it. --></div>
+<div class="notice">AI writing can contain mistakes. Check names, dates and numbers before sending anything important.</div>
+</section>
+
+<section class="view" id="v-how"><div class="prose"><h1>How PolishDraft works</h1>
+<h2>1. Paste your draft</h2><p>Add the email or message you want to improve, between 10 and 5,000 characters. Add context such as who it is for if that helps.</p>
+<h2>2. Choose a mode, tone and length</h2><p>Modes change the task (for example fixing grammar only, or suggesting subject lines). Tone and length are preferences, so results will not match an exact word count.</p>
+<h2>3. Review and copy</h2><p>Compare the result with your original, regenerate for another version, or use Improve Again to refine the result. Then copy it and edit as you like.</p>
+<h2>What the AI is told to do</h2><p>The instructions ask the model to keep your meaning, names, dates, numbers and commitments, and not to invent facts or promises.</p>
+<p><a class="btn p" href="#home">Polish My Writing</a></p></div></section>
+
+<section class="view" id="v-tips"><div class="prose"><h1>Writing tips</h1>
+<details open><summary>How to write a professional email</summary>
+<p><b>Lead with the point.</b> Your first sentence should say why you are writing. Busy readers decide in seconds whether to keep reading.</p>
+<p><b>Write a specific subject line.</b> “Question about Friday’s invoice” beats “Hello”. Include a date or action when there is one.</p>
+<p><b>One email, one purpose.</b> If you need three unrelated things, number them or send separate emails.</p>
+<p><b>Say what you need and by when.</b> “Could you confirm by Thursday 3 pm?” is easier to act on than “Let me know soon.”</p>
+<p><b>Close simply.</b> Thank them once, then sign off with your name. Before sending, read it aloud and check names, dates and attachments.</p></details>
+<details><summary>How to make an email sound more polite</summary>
+<p>Politeness is mostly framing, not extra words. Replace commands with requests (“Could you send…” instead of “Send…”), acknowledge the reader’s effort, and explain the reason behind a request.</p>
+<p><b>Blunt:</b> “You didn’t send the report.”<br><b>Better:</b> “I haven’t received the report yet. Could you let me know when to expect it?”</p>
+<p>Avoid piling up apologies or softeners such as “just” and “sorry to bother you”, which can sound unsure. One clear, courteous sentence works better.</p></details>
+<details><summary>How to write a professional follow-up</summary>
+<p>Wait a reasonable time (often 2 to 5 working days), then reply to your original thread so the context is attached. Open with a short reminder, restate the one action you need, and offer an easy next step.</p>
+<p><i>“Hi Sam, following up on my note from Monday about the Q3 schedule. Could you confirm which of the two dates suits you? Happy to adjust if neither works.”</i></p>
+<p>Keep the tone neutral. Avoid “as per my last email”, which reads as irritation.</p></details>
+<p class="sm">More articles will be added only when they are complete and reviewed.</p></div></section>
+
+<section class="view" id="v-about"><div class="prose"><h1>About PolishDraft</h1>
+<p>PolishDraft helps people turn drafts into clear, professional, natural-sounding emails and messages. It is aimed at anyone who writes for work or study, including people writing in a second language and anyone who wants a second pair of eyes on a tricky message.</p>
+<h2>Our approach</h2><p>The tool should improve your wording without changing what you mean. It is a writing aid, not a replacement for your judgement, so you stay in control of what you send.</p>
+<p>PolishDraft is an independent project. We do not claim any company history, team or credentials beyond that.</p></div></section>
+
+<section class="view" id="v-contact"><div class="prose"><h1>Contact Us</h1>
+<p>We’d love to hear from you. Get in touch with questions, technical problems, feedback, feature suggestions, privacy concerns, or business inquiries, and we’ll reply as soon as we can.</p>
+<p id="ce"><b>Email:</b> <span id="cev"></span></p>
+<div class="notice" id="cn">Site owner action needed: set <code>CONTACT_EMAIL</code> (and optionally <code>FORM_ENDPOINT</code>) in the page source. Until then the form is disabled, so no message can appear to be sent.</div>
+<form class="card" id="cf" novalidate>
+<div class="fld"><label for="fn">Name</label><input type="text" id="fn" autocomplete="name" maxlength="80" required aria-describedby="fne"><div class="fe" id="fne"></div></div>
+<div class="fld"><label for="fm">Email address</label><input type="email" id="fm" autocomplete="email" maxlength="120" required aria-describedby="fme"><div class="fe" id="fme"></div></div>
+<div class="fld"><label for="fs">Subject</label><select id="fs" required aria-describedby="fse"><option value="">Choose a subject</option><option>Question</option><option>Technical problem</option><option>Feedback</option><option>Feature suggestion</option><option>Privacy concern</option><option>Accessibility issue</option><option>Business inquiry</option></select><div class="fe" id="fse"></div></div>
+<div class="fld"><label for="fb">Message</label><textarea id="fb" maxlength="2000" required aria-describedby="fbe" style="min-height:150px"></textarea><div class="fe" id="fbe"></div></div>
+<div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" id="hp" tabindex="-1" autocomplete="off"></label></div>
+<p class="sm">Please don’t include passwords or sensitive information. See our <a href="#privacy">Privacy Policy</a> for how messages are handled.</p>
+<button class="btn p" id="fgo" type="submit">Send message</button>
+<div id="fst" role="status" style="margin-top:10px;font-weight:600"></div>
+</form></div></section>
+
+<section class="view" id="v-privacy"><div class="prose"><h1>Privacy Policy</h1>
+<p class="sm">Draft for the site owner to review. It describes how this version works; update it if you add analytics, ads or storage.</p>
+<h2>Your writing</h2><p>When you press Polish, the text, your selected options, and any context or custom instructions are sent to an AI model through the Puter service to produce the result. Your text is sent directly from your browser to Puter (puter.com), which runs the model and may ask you to sign in to a free Puter account; Puter’s privacy policy applies. PolishDraft’s own code does not store or log your text. The AI provider and the hosting platform may process or retain data under their own policies; we do not control that, so avoid pasting passwords, financial details or other sensitive information.</p>
+<h2>Contact messages</h2><p>The contact form asks only for your name, email address, a subject and your message, used solely to reply to you. If a form service is configured, it receives and may store these details under its own policy; if only an email address is configured, the form opens your own email app, so the message goes through your email provider and is kept in the inboxes involved. We do not use contact details for marketing. Ask us to delete a message by emailing us.</p>
+<h2>Fonts</h2><p>The site loads its fonts (Fraunces and Plus Jakarta Sans) from Google Fonts, so your browser contacts Google servers and your IP address is visible to them.</p>
+<h2>Cookies and storage</h2><p>The site uses your browser’s local storage only to remember your light or dark theme. We do not set advertising or tracking cookies and currently run no analytics.</p>
+<h2>Advertising</h2><p>No ads are active. If advertising is added later, this policy and a consent mechanism must be updated first.</p>
+<h2>Your choices</h2><p>You can clear the editor at any time and reset the theme by clearing site data in your browser.</p></div></section>
+
+<section class="view" id="v-terms"><div class="prose"><h1>Terms and Conditions</h1>
+<p class="sm">Draft for the site owner to review with a qualified adviser for your jurisdiction.</p>
+<h2>Acceptable use</h2><p>Do not use PolishDraft to produce unlawful, harassing, deceptive or abusive content, or to attempt to disrupt the service.</p>
+<h2>Your responsibility</h2><p>You are responsible for the text you submit and for reviewing results before you use them. You keep ownership of your own text; output is provided for you to use as you see fit.</p>
+<h2>Av
