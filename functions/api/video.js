@@ -88,11 +88,16 @@ export async function onRequestGet({ request }) {
   const micro = player?.microformat?.playerMicroformatRenderer;
 
   if (!details || details.videoId !== id) {
-    return json({
-      error: "unavailable",
-      message: "YouTube did not provide readable public video data.",
-    }, 502);
-  }
+  return json({
+    error: "unavailable",
+    message: "Could not extract video details.",
+    pageContainsPlayerResponse: html.includes("ytInitialPlayerResponse"),
+    pageContainsVideoDetails: html.includes("videoDetails"),
+    pageContainsConsent: html.includes("consent"),
+    pageContainsCaptcha: html.includes("captcha"),
+    pageLength: html.length,
+  }, 502);
+}
 
   const text = (html.match(/"label"\s*:\s*"[^"]*(?:like|likes)[^"]*"/i) || [])[0];
   let likeCount = null;
